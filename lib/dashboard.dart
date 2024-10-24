@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:task_manager/const/app_color.dart';
+import 'package:task_manager/features/reminder/reminder_settings.dart';
 import 'package:task_manager/features/schedule/schedule_list.dart';
 import 'package:task_manager/features/task/add_new_task.dart';
 import 'package:task_manager/models/schedule.dart';
+
+import 'features/task/task_list.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -151,7 +154,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ScheduleListPage()),
+                                builder: (context) => TaskListPage()),
                           );
                         }
                     ),
@@ -163,7 +166,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ScheduleListPage()),
+                                builder: (context) => AddNewTaskPage(isEditTask: false,)),
                           );
                         }
                     ),
@@ -172,7 +175,11 @@ class _DashboardPageState extends State<DashboardPage> {
                       title: 'Reminder Settings',
                       color: Colors.purple[200],
                         onTap: () {
-
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ReminderSettingsPage()),
+                          );
                         }
                     ),
                   ],

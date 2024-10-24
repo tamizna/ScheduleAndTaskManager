@@ -1,158 +1,207 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MyApp());
+class NotificationSettings extends StatefulWidget {
+  const NotificationSettings({Key? key}) : super(key: key);
+
+  @override
+  _NotificationSettingsState createState() => _NotificationSettingsState();
 }
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: ProfileScreen(),
-    );
-  }
-}
+class _NotificationSettingsState extends State<NotificationSettings> {
+  String _selectedTone = 'Silent';
+  String _selectedVibrate = 'Off';
+  String _selectedLight = 'White';
 
-class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
+    return Container(
+      color: const Color(0xFF1F2937), // Dark background color
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 20),
-            // Profile Info Section
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(30),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.2),
-                      blurRadius: 10,
-                      spreadRadius: 2,
-                    ),
-                  ],
+            // Notification Tone Section
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Notification tone',
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 12,
+                  ),
                 ),
-                padding: EdgeInsets.all(20),
-                child: Row(
-                  children: [
-                    // Profile picture
-                    CircleAvatar(
-                      radius: 30,
-                      backgroundImage: AssetImage('assets/images/profile.png'),
+                ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  title: Text(
+                    _selectedTone,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
                     ),
-                    SizedBox(width: 20),
-                    // User name and email
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Emi Wilson',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
+                  ),
+                  onTap: () {
+                    // Handle tone selection
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        backgroundColor: const Color(0xFF1F2937),
+                        title: const Text(
+                          'Select Tone',
+                          style: TextStyle(color: Colors.white),
                         ),
-                        SizedBox(height: 5),
-                        Text(
-                          'angela@gmail.com',
-                          style: TextStyle(
-                            color: Colors.grey,
-                          ),
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            'Silent',
+                            'Default',
+                            'Tone 1',
+                            'Tone 2'
+                          ].map((tone) => RadioListTile(
+                            title: Text(
+                              tone,
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                            value: tone,
+                            groupValue: _selectedTone,
+                            onChanged: (value) {
+                              setState(() {
+                                _selectedTone = value.toString();
+                              });
+                              Navigator.pop(context);
+                            },
+                          )).toList(),
                         ),
-                      ],
-                    ),
-                  ],
+                      ),
+                    );
+                  },
                 ),
-              ),
+                const Divider(color: Colors.grey, height: 1),
+              ],
             ),
-            SizedBox(height: 20),
-            // Grid of Options
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: GridView.count(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 15,
-                  mainAxisSpacing: 15,
-                  children: [
-                    buildOptionCard(
-                      icon: Icons.visibility,
-                      title: 'View preference',
-                      color: Colors.purple[100],
-                    ),
-                    buildOptionCard(
-                      icon: Icons.download,
-                      title: 'Download options',
-                      color: Colors.blue[100],
-                    ),
-                    buildOptionCard(
-                      icon: Icons.play_circle_fill,
-                      title: 'Playback options',
-                      color: Colors.pink[100],
-                    ),
-                    buildOptionCard(
-                      icon: Icons.settings,
-                      title: 'General option',
-                      color: Colors.purple[200],
-                    ),
-                  ],
+            const SizedBox(height: 16),
+
+            // Vibrate Section
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Vibrate',
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 12,
+                  ),
                 ),
-              ),
+                ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  title: Text(
+                    _selectedVibrate,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
+                  ),
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        backgroundColor: const Color(0xFF1F2937),
+                        title: const Text(
+                          'Select Vibration',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            'Off',
+                            'Default',
+                            'Short',
+                            'Long'
+                          ].map((vibrate) => RadioListTile(
+                            title: Text(
+                              vibrate,
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                            value: vibrate,
+                            groupValue: _selectedVibrate,
+                            onChanged: (value) {
+                              setState(() {
+                                _selectedVibrate = value.toString();
+                              });
+                              Navigator.pop(context);
+                            },
+                          )).toList(),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                const Divider(color: Colors.grey, height: 1),
+              ],
+            ),
+            const SizedBox(height: 16),
+
+            // Light Section
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Light',
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 12,
+                  ),
+                ),
+                ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  title: Text(
+                    _selectedLight,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
+                  ),
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        backgroundColor: const Color(0xFF1F2937),
+                        title: const Text(
+                          'Select Light',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            'White',
+                            'Red',
+                            'Blue',
+                            'Green'
+                          ].map((light) => RadioListTile(
+                            title: Text(
+                              light,
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                            value: light,
+                            groupValue: _selectedLight,
+                            onChanged: (value) {
+                              setState(() {
+                                _selectedLight = value.toString();
+                              });
+                              Navigator.pop(context);
+                            },
+                          )).toList(),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                const Divider(color: Colors.grey, height: 1),
+              ],
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  // Function to build option cards
-  Widget buildOptionCard({required IconData icon, required String title, required Color? color}) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            blurRadius: 10,
-            spreadRadius: 2,
-          ),
-        ],
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          // Circular icon container
-          Container(
-            padding: EdgeInsets.all(15),
-            decoration: BoxDecoration(
-              color: color,
-              shape: BoxShape.circle,
-            ),
-            child: Icon(
-              icon,
-              size: 30,
-              color: Colors.black54,
-            ),
-          ),
-          SizedBox(height: 10),
-          // Text below icon
-          Text(
-            title,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-              color: Colors.black87,
-            ),
-          ),
-        ],
       ),
     );
   }

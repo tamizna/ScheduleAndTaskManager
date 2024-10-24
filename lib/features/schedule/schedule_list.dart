@@ -18,6 +18,11 @@ class _ScheduleListPageState extends State<ScheduleListPage> {
     Schedule(namaMatkul: 'Pemrograman Mahir', hari: 'Selasa', jamMulai: '09.00', jamSelesai: '10.30', kelas: 'A', ruang: 'E535', dosen: 'Suminem'),
     Schedule(namaMatkul: 'Struktur Data', hari: 'Rabu', jamMulai: '09.00', jamSelesai: '10.30', kelas: 'A', ruang: 'E535', dosen: 'Tukiyem'),
     Schedule(namaMatkul: 'Pemrograman Dasar', hari: 'Kamis', jamMulai: '09.00', jamSelesai: '10.30', kelas: 'A', ruang: 'E535', dosen: 'Suminem'),
+    Schedule(namaMatkul: 'Pemrograman Dasar', hari: 'Senin', jamMulai: '09.00', jamSelesai: '10.30', kelas: 'A', ruang: 'E535', dosen: 'Tukiyem'),
+    Schedule(namaMatkul: 'Pemrograman Lanjut', hari: 'Senin', jamMulai: '09.00', jamSelesai: '10.30', kelas: 'A', ruang: 'E535', dosen: 'Tukiyem'),
+    Schedule(namaMatkul: 'Pemrograman Mahir', hari: 'Selasa', jamMulai: '09.00', jamSelesai: '10.30', kelas: 'A', ruang: 'E535', dosen: 'Suminem'),
+    Schedule(namaMatkul: 'Struktur Data', hari: 'Rabu', jamMulai: '09.00', jamSelesai: '10.30', kelas: 'A', ruang: 'E535', dosen: 'Tukiyem'),
+    Schedule(namaMatkul: 'Pemrograman Dasar', hari: 'Kamis', jamMulai: '09.00', jamSelesai: '10.30', kelas: 'A', ruang: 'E535', dosen: 'Suminem'),
   ];
 
   @override
@@ -37,7 +42,7 @@ class _ScheduleListPageState extends State<ScheduleListPage> {
                   builder: (context) => AddNewCoursePage()),
             );
           },
-          backgroundColor: Colors.green.shade500,
+          backgroundColor: darkPrimaryColor,
           child: Icon(Icons.add, size: 30),
         ),
         body:
