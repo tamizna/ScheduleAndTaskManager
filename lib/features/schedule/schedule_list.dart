@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:task_manager/features/task/add_new_task.dart';
+import 'package:task_manager/const/app_color.dart';
 import 'package:task_manager/models/schedule.dart';
+
+import 'add_new_course.dart';
 
 class ScheduleListPage extends StatefulWidget {
   const ScheduleListPage({super.key});
@@ -22,15 +24,17 @@ class _ScheduleListPageState extends State<ScheduleListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: darkPrimaryColor,
           title: Text('Schedule'),
         ),
+        backgroundColor: whiteColor,
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             // Navigate to the Home page
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => AddNewTaskPage()),
+                  builder: (context) => AddNewCoursePage()),
             );
           },
           backgroundColor: Colors.green.shade500,
@@ -40,9 +44,100 @@ class _ScheduleListPageState extends State<ScheduleListPage> {
         ListView.builder(
           itemCount: dummySchedule.length,
           itemBuilder: (context, index) {
-            return customListItem(dummySchedule[index]);
+            return buildScheduleCard(dummySchedule[index]);
           },
         )
+    );
+  }
+
+
+  Widget buildScheduleCard(Schedule item) {
+    return Card(
+      color: backgroundColor, // Dark card background color
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Subject Name
+            Text(
+              item.namaMatkul,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: primaryTextColor,
+              ),
+            ),
+            SizedBox(height: 8),
+            // Time, Class, Room Row
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                // Time and Class
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '${item.hari}, ${item.jamMulai} - ${item.jamSelesai}',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: secondaryTextColor,
+                      ),
+                    ),
+                    SizedBox(height: 4),
+                    Text(
+                      'Kelas: ${item.kelas}',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: secondaryTextColor,
+                      ),
+                    ),
+                  ],
+                ),
+                // Room Icon and Room Number
+                Row(
+                  children: [
+                    Icon(
+                      Icons.room_rounded,
+                      color: accentColor,
+                    ),
+                    SizedBox(width: 5),
+                    Text(
+                      item.ruang,
+                      style: TextStyle(
+                        color: accentColor,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(height: 10),
+            // Professor Name
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 5),
+              decoration: BoxDecoration(
+                color: darkPrimaryColor,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Center(
+                child: Text(
+                  item.dosen,
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: whiteColor,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 

@@ -38,6 +38,7 @@ dependencies:
   fluttertoast: ^8.2.8
   giffy_dialog: ^2.1.0
   msh_checkbox: ^1.1.1
+  flutter_native_splash: ^2.2.16
   # firebase_auth: ^4.3.0
   # cloud_firestore: ^4.5.0
 
@@ -51,7 +52,13 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^4.0.0
-  flutter_native_splash: ^2.2.16
+
+flutter_native_splash:
+  color: "#42a5f5"  # Background color of the splash screen
+  image: images/reminder_illustration.png  # Path to your splash image (ensure it's included in your assets)
+  android: true
+  ios: true
+  fullscreen: true  # Makes the splash screen fullscreen
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -98,10 +105,3 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
-
-flutter_native_splash:
-  color: "#42a5f5"  # Background color of the splash screen
-  image: images/reminder_illustration.png  # Path to your splash image (ensure it's included in your assets)
-  android: true
-  ios: true
-  fullscreen: true  # Makes the splash screen fullscreen

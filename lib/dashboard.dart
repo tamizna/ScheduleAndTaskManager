@@ -65,8 +65,9 @@ class _DashboardPageState extends State<DashboardPage> {
       appBar: AppBar(
         backgroundColor: darkPrimaryColor,
         title: Text('Dashboard'),
+      //  automaticallyImplyLeading: false, // Disable the back button
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: whiteColor,
       body: SafeArea(
         child: Column(
           children: [
@@ -130,32 +131,45 @@ class _DashboardPageState extends State<DashboardPage> {
                   mainAxisSpacing: 15,
                   children: [
                     buildOptionCard(
-                      icon: Icons.visibility,
-                      title: 'View preference',
+                      icon: Icons.calendar_month_rounded,
+                      title: 'Schedule',
                       color: Colors.purple[100],
                       onTap: () {
-
+                        // Navigate to schedule list page
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ScheduleListPage()),
+                        );
                       }
                     ),
                     buildOptionCard(
-                      icon: Icons.download,
-                      title: 'Download options',
+                      icon: Icons.view_list_rounded,
+                      title: 'All Tasks',
                       color: Colors.blue[100],
                         onTap: () {
-
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ScheduleListPage()),
+                          );
                         }
                     ),
                     buildOptionCard(
-                      icon: Icons.play_circle_fill,
-                      title: 'Playback options',
+                      icon: Icons.add_task_rounded,
+                      title: 'Add New Task',
                       color: Colors.pink[100],
                         onTap: () {
-
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ScheduleListPage()),
+                          );
                         }
                     ),
                     buildOptionCard(
-                      icon: Icons.settings,
-                      title: 'General option',
+                      icon: Icons.circle_notifications_rounded,
+                      title: 'Reminder Settings',
                       color: Colors.purple[200],
                         onTap: () {
 

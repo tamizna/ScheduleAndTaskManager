@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:task_manager/const/app_color.dart';
+import 'package:task_manager/dashboard.dart';
+import 'package:task_manager/register.dart';
 
-import 'const/app_color.dart';
-import 'models/user.dart';
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
-class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+  // This widget is the home page of your application. It is stateful, meaning
+  // that it has a State object (defined below) that contains fields that affect
+  // how it looks.
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
-  TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -21,13 +24,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: darkPrimaryColor,
-        title: Text('Create an Account'),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
+        title: Text('Schedule & Task Manager'),
       ),
       backgroundColor: whiteColor,
       body: Form(
@@ -37,19 +34,19 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child: TextFormField(
-                    controller: nameController,
-                    decoration: const InputDecoration(
-                        border: OutlineInputBorder(), labelText: "Full Name"),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your full name';
-                      }
-                      return null;
-                    },
+                Text(
+                  'Login',
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: lightPrimaryColor),
+                ),
+                SizedBox(height: 25),
+                Container(
+                  height: 256,
+                  width: 256,
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    image: DecorationImage(
+                        image: AssetImage('images/reminder_illustration.png'),
+                        fit: BoxFit.cover),
                   ),
                 ),
                 Padding(
@@ -90,20 +87,32 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          // Success. Handle new user data
-                          // Creating a new User instance but still dummy
-                        //  User user1 = User(name: "Alice", age: 30, email: "alice@example.com");
-
-                          // Navigate back to login page
-                          Navigator.pop(context);
+                          // Navigate to the Home page
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => DashboardPage()),
+                          );
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(content: Text('Please fill input')),
                           );
                         }
                       },
-                      child: const Text('Register'),
+                      child: const Text('Login'),
                     ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    // Navigate to Register Page
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => RegisterPage()),
+                    );
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: Text("Don't have an account? Register"),
                   ),
                 )
               ],

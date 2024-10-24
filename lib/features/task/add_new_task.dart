@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_manager/const/app_color.dart';
 
 class AddNewTaskPage extends StatefulWidget {
   const AddNewTaskPage({super.key});
@@ -12,6 +13,7 @@ class _AddNewTaskPageState extends State<AddNewTaskPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: darkPrimaryColor,
           title: Text('Create New Task'),
         )
     );
